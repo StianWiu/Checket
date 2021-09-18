@@ -25,7 +25,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var discord_js_1 = __importStar(require("discord.js"));
 var dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
-var config = require('./config.json');
 var client = new discord_js_1.default.Client({
     intents: [
         discord_js_1.Intents.FLAGS.GUILDS,

@@ -2,7 +2,6 @@ import DiscordJS, { Intents } from 'discord.js'
 import dotenv from 'dotenv'
 dotenv.config()
 
-const config = require('./config.json')
 
 const client = new DiscordJS.Client({
     intents: [
