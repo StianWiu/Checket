@@ -24,10 +24,12 @@
     "cloudmersive-virus-api-client": "^1.2.2",
     "discord.js": "^13.1.0",
     "dotenv": "^10.0.0",
+    "node-virustotal": "^3.35.0",
     "nodemon": "^2.0.12",
     "wokcommands": "^1.3.983"
   },
   "devDependencies": {
+    "@types/node": "^16.9.4",
     "typescript": "^4.4.3"
   }
 }
