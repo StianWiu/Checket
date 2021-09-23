@@ -20,8 +20,6 @@
   },
   "homepage": "https://github.com/Pignuuu/Checket#readme",
   "dependencies": {
-    "cloudmersive-validate-api-client": "^1.4.6",
-    "cloudmersive-virus-api-client": "^1.2.2",
     "discord.js": "^13.1.0",
     "dotenv": "^10.0.0",
     "node-virustotal": "^3.35.0",
