@@ -9,14 +9,14 @@ export default {
     slash: false,
     guildOnly: true,
     testOnly: false,
-    options: [
-        {
-            required: true,
-            name: "link",
-            description: "Link that you want to check.",
-            type: "STRING",
-        }
-    ],
+    // options: [
+    //     {
+    //         required: true,
+    //         name: "link",
+    //         description: "Link that you want to check.",
+    //         type: "STRING",
+    //     }
+    // ],
 
     callback: async ({ args, message }) => {
         const link = (args[0])

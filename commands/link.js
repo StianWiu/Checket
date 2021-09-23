@@ -43,14 +43,14 @@ exports.default = {
     slash: false,
     guildOnly: true,
     testOnly: false,
-    options: [
-        {
-            required: true,
-            name: "link",
-            description: "Link that you want to check.",
-            type: "STRING",
-        }
-    ],
+    // options: [
+    //     {
+    //         required: true,
+    //         name: "link",
+    //         description: "Link that you want to check.",
+    //         type: "STRING",
+    //     }
+    // ],
     callback: function (_a) {
         var args = _a.args, message = _a.message;
         return __awaiter(void 0, void 0, void 0, function () {
