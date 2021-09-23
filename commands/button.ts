@@ -1,6 +1,5 @@
 import { ButtonInteraction, MessageActionRow, MessageButton } from "discord.js";
 import { ICommand } from "wokcommands";
-var CloudmersiveValidateApiClient = require('cloudmersive-validate-api-client');
 export default {
     category: 'Testing',
     description: 'Button',
