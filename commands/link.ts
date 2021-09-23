@@ -6,9 +6,9 @@ import embed from "./embed";
 export default {
     category: 'Link',
     description: 'Get screenshot of specified link.',
-    slash: "both",
+    slash: false,
     guildOnly: true,
-    testOnly: true,
+    testOnly: false,
     options: [
         {
             required: true,

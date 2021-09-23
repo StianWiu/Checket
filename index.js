@@ -40,7 +40,7 @@ client.on('ready', function () {
     new wokcommands_1.default(client, {
         commandsDir: path_1.default.join(__dirname, 'commands'),
         typeScript: false,
-        testServers: ['715215005812785182'],
+        // testServers: ['715215005812785182'], //Chooses what server to directly deploy /commands to.
         disabledDefaultCommands: [
             'channelonly',
             'command',

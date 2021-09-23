@@ -40,9 +40,9 @@ var discord_js_1 = require("discord.js");
 exports.default = {
     category: 'Link',
     description: 'Get screenshot of specified link.',
-    slash: "both",
+    slash: false,
     guildOnly: true,
-    testOnly: true,
+    testOnly: false,
     options: [
         {
             required: true,
