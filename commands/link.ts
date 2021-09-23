@@ -27,7 +27,7 @@ export default {
             const puppeteer = require("puppeteer");
 
             const capture = async () => {
-                const browser = await puppeteer.launch();
+                const browser = await puppeteer.launch({headless: true, args: ['--no-sandbox']});
                 const page = await browser.newPage();
                 await page.goto(link);
                 await page.screenshot({ path: "./temp/" + filename + ".png" });
