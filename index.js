@@ -39,7 +39,7 @@ client.on('ready', function () {
     // Settings for WOKCommands.
     new wokcommands_1.default(client, {
         commandsDir: path_1.default.join(__dirname, 'commands'),
-        typeScript: true,
+        typeScript: false,
         testServers: ['715215005812785182'],
         disabledDefaultCommands: [
             'channelonly',

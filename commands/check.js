@@ -45,7 +45,7 @@ exports.default = {
     callback: function (_a) {
         var args = _a.args, message = _a.message;
         return __awaiter(void 0, void 0, void 0, function () {
-            var link, randomstring, filename_1, puppeteer_1, capture, embed_1, newMessage;
+            var link, randomstring, filename_1, puppeteer_1, capture, embed, newMessage;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
@@ -108,15 +108,15 @@ exports.default = {
                         }); });
                         return [3 /*break*/, 5];
                     case 1:
-                        embed_1 = new discord_js_1.MessageEmbed()
+                        embed = new discord_js_1.MessageEmbed()
                             .setTitle("Error")
                             .setDescription("You did not provide a valid link.")
                             .setFooter("Valid link should start with http:// or https://", "https://cdn.discordapp.com/avatars/888736693128151103/1cfc286bdcede1eb4d227d53fc5413fb.webp?size=128")
                             .setColor("RED");
                         if (!(message === undefined)) return [3 /*break*/, 2];
-                        return [2 /*return*/, embed_1];
+                        return [2 /*return*/, embed];
                     case 2: return [4 /*yield*/, message.reply({
-                            embeds: [embed_1]
+                            embeds: [embed]
                         })];
                     case 3:
                         newMessage = _b.sent();

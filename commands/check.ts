@@ -1,7 +1,6 @@
-import { DiscordAPIError, Message, MessageEmbed } from "discord.js";
+import { MessageEmbed } from "discord.js";
 import { parse } from "dotenv";
 import { ICommand } from "wokcommands";
-import embed from "./embed";
 
 export default {
     category: 'Link',
