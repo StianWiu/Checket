@@ -40,7 +40,7 @@ client.on('ready', function () {
     new wokcommands_1.default(client, {
         commandsDir: path_1.default.join(__dirname, 'commands'),
         typeScript: false,
-        // testServers: ['715215005812785182'], //Chooses what server to directly deploy /commands to.
+        testServers: ['715215005812785182'],
         disabledDefaultCommands: [
             'channelonly',
             'command',
@@ -51,6 +51,7 @@ client.on('ready', function () {
             'help',
         ]
     })
+        .setDefaultPrefix('!')
         .setBotOwner('283331663482585088');
 });
 client.login(process.env.TOKEN);
