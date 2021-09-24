@@ -19,7 +19,7 @@ client.on('ready', () => {
 
     new WOKCommands(client, {
         commandsDir: path.join(__dirname, 'commands'),
-        typeScript: false, //This should be false when deploying to server. Only true when not using compiler.
+        typeScript: true, //This should be false when deploying to server. Only true when not using compiler.
         testServers: ['715215005812785182'], //Chooses what server to directly deploy /commands to.
         disabledDefaultCommands: [ //Disable commands that come pre made with WOKCommands.
             'channelonly',
@@ -32,7 +32,6 @@ client.on('ready', () => {
         ]
     })
     .setDefaultPrefix('!')
-    .setBotOwner('283331663482585088')
 })
 
 client.login(process.env.TOKEN)

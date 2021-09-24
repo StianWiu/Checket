@@ -84,36 +84,26 @@ exports.default = {
                             });
                         }); };
                         capture().then(function (response) { return __awaiter(void 0, void 0, void 0, function () {
-                            var imgur;
+                            var embed, newMessage, fs;
                             return __generator(this, function (_a) {
-                                imgur = require('imgur');
-                                message.channel.sendTyping();
-                                imgur
-                                    .uploadFile('./temp/' + filename_1 + ".png")
-                                    .then(function (json) { return __awaiter(void 0, void 0, void 0, function () {
-                                    var embed, newMessage, fs;
-                                    return __generator(this, function (_a) {
-                                        switch (_a.label) {
-                                            case 0:
-                                                // Send image in embed
-                                                message.channel.sendTyping();
-                                                embed = new discord_js_1.MessageEmbed()
-                                                    .setTitle(link)
-                                                    .setColor('#F86154')
-                                                    .setFooter("Checket", "https://cdn.discordapp.com/avatars/888736693128151103/1cfc286bdcede1eb4d227d53fc5413fb.webp?size=128")
-                                                    .setImage(json.link);
-                                                return [4 /*yield*/, message.reply({
-                                                        embeds: [embed]
-                                                    })];
-                                            case 1:
-                                                newMessage = _a.sent();
-                                                fs = require('fs');
-                                                fs.unlinkSync('./temp/' + filename_1 + ".png");
-                                                return [2 /*return*/];
-                                        }
-                                    });
-                                }); });
-                                return [2 /*return*/];
+                                switch (_a.label) {
+                                    case 0:
+                                        // Send image in embed
+                                        message.channel.sendTyping();
+                                        embed = new discord_js_1.MessageEmbed()
+                                            .setTitle(link)
+                                            .setColor('#F86154')
+                                            .setFooter("Checket", "https://cdn.discordapp.com/avatars/888736693128151103/1cfc286bdcede1eb4d227d53fc5413fb.webp?size=128")
+                                            .setImage("attachment://" + filename_1 + ".png");
+                                        return [4 /*yield*/, message.reply({
+                                                embeds: [embed], files: ['./temp/' + filename_1 + '.png']
+                                            })];
+                                    case 1:
+                                        newMessage = _a.sent();
+                                        fs = require('fs');
+                                        fs.unlinkSync('./temp/' + filename_1 + ".png");
+                                        return [2 /*return*/];
+                                }
                             });
                         }); });
                         return [3 /*break*/, 5];
