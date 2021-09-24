@@ -1,7 +1,7 @@
 # Hello!
 
 This is my side project Checket.
-You can add it to your server [here.](https://discord.com/api/oauth2/authorize?client_id=888736693128151103&permissions=2147502144&redirect_uri=https%3A%2F%2Fstianwiu.me&scope=applications.commands%20bot) Though it is still a work in progress.
+You can add it to your server [here.](https://discord.com/api/oauth2/authorize?client_id=888736693128151103&permissions=2147534848&scope=applications.commands%20bot) Though it is still a work in progress.
 
 ## Build Setup
 
