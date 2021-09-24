@@ -42,24 +42,16 @@ exports.default = {
     description: 'Get screenshot of specified link.',
     slash: false,
     guildOnly: true,
-    testOnly: false,
-    // options: [
-    //     {
-    //         required: true,
-    //         name: "link",
-    //         description: "Link that you want to check.",
-    //         type: "STRING",
-    //     }
-    // ],
     callback: function (_a) {
         var args = _a.args, message = _a.message;
         return __awaiter(void 0, void 0, void 0, function () {
-            var link, randomstring, filename_1, puppeteer_1, capture, imgur, embed_1, newMessage;
+            var link, randomstring, filename_1, puppeteer_1, capture, embed_1, newMessage;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
                         link = (args[0]);
-                        if (!(link.startsWith("http://", 0) || link.startsWith("https://", 0))) return [3 /*break*/, 2];
+                        if (!(link.startsWith("http://", 0) || link.startsWith("https://", 0))) return [3 /*break*/, 1];
+                        message.channel.sendTyping();
                         randomstring = require("randomstring");
                         filename_1 = randomstring.generate();
                         puppeteer_1 = require("puppeteer");
@@ -67,7 +59,7 @@ exports.default = {
                             var browser, page;
                             return __generator(this, function (_a) {
                                 switch (_a.label) {
-                                    case 0: return [4 /*yield*/, puppeteer_1.launch({ headless: true, args: ['--no-sandbox'] })];
+                                    case 0: return [4 /*yield*/, puppeteer_1.launch({ defaultViewport: { width: 1920, height: 1080 }, headless: true, args: ['--no-sandbox'] })];
                                     case 1:
                                         browser = _a.sent();
                                         return [4 /*yield*/, browser.newPage()];
@@ -76,66 +68,74 @@ exports.default = {
                                         return [4 /*yield*/, page.goto(link)];
                                     case 3:
                                         _a.sent();
-                                        return [4 /*yield*/, page.screenshot({ path: "./temp/" + filename_1 + ".png" })];
+                                        message.channel.sendTyping();
+                                        return [4 /*yield*/, new Promise(function (resolve) { return setTimeout(resolve, 5000); })];
                                     case 4:
                                         _a.sent();
-                                        return [4 /*yield*/, browser.close()];
+                                        message.channel.sendTyping();
+                                        return [4 /*yield*/, page.screenshot({ path: "./temp/" + filename_1 + ".png" })];
                                     case 5:
+                                        _a.sent();
+                                        return [4 /*yield*/, browser.close()];
+                                    case 6:
                                         _a.sent();
                                         return [2 /*return*/];
                                 }
                             });
                         }); };
-                        capture();
-                        return [4 /*yield*/, new Promise(function (resolve) { return setTimeout(resolve, 2500); })];
-                    case 1:
-                        _b.sent();
-                        imgur = require('imgur');
-                        imgur
-                            .uploadFile('./temp/' + filename_1 + ".png")
-                            .then(function (json) { return __awaiter(void 0, void 0, void 0, function () {
-                            var embed, newMessage, fs;
+                        capture().then(function (response) { return __awaiter(void 0, void 0, void 0, function () {
+                            var imgur;
                             return __generator(this, function (_a) {
-                                switch (_a.label) {
-                                    case 0: return [4 /*yield*/, new Promise(function (resolve) { return setTimeout(resolve, 2500); })];
-                                    case 1:
-                                        _a.sent();
-                                        embed = new discord_js_1.MessageEmbed()
-                                            .setTitle(link)
-                                            .setColor('GREEN')
-                                            .setFooter("Checket", "https://cdn.discordapp.com/avatars/888736693128151103/1cfc286bdcede1eb4d227d53fc5413fb.webp?size=128")
-                                            .setImage(json.link);
-                                        return [4 /*yield*/, message.reply({
-                                                embeds: [embed]
-                                            })];
-                                    case 2:
-                                        newMessage = _a.sent();
-                                        fs = require('fs');
-                                        fs.unlinkSync('./temp/' + filename_1 + ".png");
-                                        return [2 /*return*/];
-                                }
+                                imgur = require('imgur');
+                                message.channel.sendTyping();
+                                imgur
+                                    .uploadFile('./temp/' + filename_1 + ".png")
+                                    .then(function (json) { return __awaiter(void 0, void 0, void 0, function () {
+                                    var embed, newMessage, fs;
+                                    return __generator(this, function (_a) {
+                                        switch (_a.label) {
+                                            case 0:
+                                                // Send image in embed
+                                                message.channel.sendTyping();
+                                                embed = new discord_js_1.MessageEmbed()
+                                                    .setTitle(link)
+                                                    .setColor('GREEN')
+                                                    .setFooter("Checket", "https://cdn.discordapp.com/avatars/888736693128151103/1cfc286bdcede1eb4d227d53fc5413fb.webp?size=128")
+                                                    .setImage(json.link);
+                                                return [4 /*yield*/, message.reply({
+                                                        embeds: [embed]
+                                                    })];
+                                            case 1:
+                                                newMessage = _a.sent();
+                                                fs = require('fs');
+                                                fs.unlinkSync('./temp/' + filename_1 + ".png");
+                                                return [2 /*return*/];
+                                        }
+                                    });
+                                }); });
+                                return [2 /*return*/];
                             });
                         }); });
-                        return [3 /*break*/, 6];
-                    case 2:
+                        return [3 /*break*/, 5];
+                    case 1:
                         embed_1 = new discord_js_1.MessageEmbed()
                             .setTitle("Error")
                             .setDescription("You did not provide a valid link.")
                             .setFooter("Valid link should start with http:// or https://", "https://cdn.discordapp.com/avatars/888736693128151103/1cfc286bdcede1eb4d227d53fc5413fb.webp?size=128")
                             .setColor("RED");
-                        if (!(message === undefined)) return [3 /*break*/, 3];
+                        if (!(message === undefined)) return [3 /*break*/, 2];
                         return [2 /*return*/, embed_1];
-                    case 3: return [4 /*yield*/, message.reply({
+                    case 2: return [4 /*yield*/, message.reply({
                             embeds: [embed_1]
                         })];
-                    case 4:
+                    case 3:
                         newMessage = _b.sent();
                         return [4 /*yield*/, new Promise(function (resolve) { return setTimeout(resolve, 5 * 1000); })];
-                    case 5:
+                    case 4:
                         _b.sent();
                         newMessage.delete();
-                        _b.label = 6;
-                    case 6: return [2 /*return*/];
+                        _b.label = 5;
+                    case 5: return [2 /*return*/];
                 }
             });
         });
