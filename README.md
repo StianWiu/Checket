@@ -3,7 +3,7 @@
 This is my side project Checket.
 You can add it to your server [here.](https://discord.com/api/oauth2/authorize?client_id=888736693128151103&permissions=2147534848&scope=applications.commands%20bot) Though it is still a work in progress.
 
-What it does currently is it screenshots any link you give it and sends it back to you. This can be useful for checking skethy links and avoiding rickrolls.
+What it does currently is it screenshots any link you give it and sends it back to you. This can be useful for checking sketchy links and avoiding rickrolls.
 
 ## Build Setup
 
