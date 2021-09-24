@@ -99,7 +99,7 @@ exports.default = {
                                                 message.channel.sendTyping();
                                                 embed = new discord_js_1.MessageEmbed()
                                                     .setTitle(link)
-                                                    .setColor('GREEN')
+                                                    .setColor('#F86154')
                                                     .setFooter("Checket", "https://cdn.discordapp.com/avatars/888736693128151103/1cfc286bdcede1eb4d227d53fc5413fb.webp?size=128")
                                                     .setImage(json.link);
                                                 return [4 /*yield*/, message.reply({

@@ -40,7 +40,7 @@ export default {
                         message.channel.sendTyping();
                         const embed = new MessageEmbed()
                             .setTitle(link)
-                            .setColor('GREEN')
+                            .setColor('#F86154')
                             .setFooter("Checket", "https://cdn.discordapp.com/avatars/888736693128151103/1cfc286bdcede1eb4d227d53fc5413fb.webp?size=128")
                             .setImage(json.link)
                         const newMessage = await message.reply({
