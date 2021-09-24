@@ -39,7 +39,7 @@ client.on('ready', function () {
     // Settings for WOKCommands.
     new wokcommands_1.default(client, {
         commandsDir: path_1.default.join(__dirname, 'commands'),
-        typeScript: false,
+        typeScript: true,
         testServers: ['715215005812785182'],
         disabledDefaultCommands: [
             'channelonly',
@@ -51,9 +51,9 @@ client.on('ready', function () {
             'help',
         ]
     })
-        .setDefaultPrefix('!');
+        .setDefaultPrefix('?');
 });
-client.login(process.env.TOKEN);
+client.login(process.env.TESTTOKEN);
 // const guildId = '715215005812785182'
 // const guild = client.guilds.cache.get(guildId)
 // let commands
