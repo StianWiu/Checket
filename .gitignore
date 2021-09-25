@@ -88,7 +88,6 @@ typings/
 .dynamodb/
 
 # Code to copy from
-
 commands/button.ts
 commands/button.js
 commands/collector.ts
