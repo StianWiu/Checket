@@ -41,17 +41,52 @@ exports.default = {
     category: "Link",
     description: "Get screenshot of specified link.",
     slash: false,
-    guildOnly: true,
     callback: function (_a) {
         var args = _a.args, message = _a.message;
         return __awaiter(void 0, void 0, void 0, function () {
-            var link_1, loadingEmbed, waitEmbed_1, waited, randomstring, filename_1, puppeteer_1, capture, embed, newMessage, embed, newMessage;
+            var link_1, valid, puppeteer, browser, page, e_1, embed, newMessage, loadingEmbed, waitEmbed_1, waited, redirect, firstUrl, secondUrl, randomstring, filename_1, puppeteer_1, capture, embed, newMessage, embed, newMessage;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
-                        if (!args[0]) return [3 /*break*/, 6];
+                        if (!args[0]) return [3 /*break*/, 15];
                         link_1 = args[0];
-                        if (!(link_1.startsWith("http://", 0) || link_1.startsWith("https://", 0))) return [3 /*break*/, 2];
+                        if (!(link_1.startsWith("http://", 0) || link_1.startsWith("https://", 0))) return [3 /*break*/, 11];
+                        valid = undefined;
+                        _b.label = 1;
+                    case 1:
+                        _b.trys.push([1, 5, , 7]);
+                        puppeteer = require("puppeteer");
+                        return [4 /*yield*/, puppeteer.launch({
+                                headless: true,
+                                args: ["--no-sandbox"],
+                            })];
+                    case 2:
+                        browser = _b.sent();
+                        return [4 /*yield*/, browser.newPage()];
+                    case 3:
+                        page = _b.sent();
+                        return [4 /*yield*/, page.goto(link_1, { waitUntil: "load", timeout: 0 })];
+                    case 4:
+                        _b.sent();
+                        return [3 /*break*/, 7];
+                    case 5:
+                        e_1 = _b.sent();
+                        embed = new discord_js_1.MessageEmbed()
+                            .setTitle("Error")
+                            .setDescription("Could not resolve " +
+                            link_1 +
+                            " are you sure you typed it correctly?")
+                            .setFooter("Checket", "https://cdn.discordapp.com/avatars/888736693128151103/1cfc286bdcede1eb4d227d53fc5413fb.webp?size=128")
+                            .setColor("RED");
+                        return [4 /*yield*/, message.reply({
+                                embeds: [embed],
+                            })];
+                    case 6:
+                        newMessage = _b.sent();
+                        valid = false;
+                        return [3 /*break*/, 7];
+                    case 7:
+                        if (!(valid == undefined)) return [3 /*break*/, 9];
                         loadingEmbed = new discord_js_1.MessageEmbed()
                             .setTitle("Please wait while I check your link.")
                             .setDescription("Please allow up to a minute for this to load.")
@@ -60,9 +95,12 @@ exports.default = {
                         return [4 /*yield*/, message.reply({
                                 embeds: [loadingEmbed],
                             })];
-                    case 1:
+                    case 8:
                         waitEmbed_1 = _b.sent();
                         waited = undefined;
+                        redirect = undefined;
+                        firstUrl = undefined;
+                        secondUrl = undefined;
                         randomstring = require("randomstring");
                         filename_1 = randomstring.generate();
                         puppeteer_1 = require("puppeteer");
@@ -88,27 +126,39 @@ exports.default = {
                                         return [4 /*yield*/, page.goto(link_1)];
                                     case 3:
                                         _a.sent();
-                                        if (!(args[1] && isNumeric(args[1]))) return [3 /*break*/, 5];
+                                        return [4 /*yield*/, page.url()];
+                                    case 4:
+                                        firstUrl = _a.sent();
+                                        if (!(args[1] && isNumeric(args[1]))) return [3 /*break*/, 6];
                                         seconds_1 = args[1];
                                         waited = true;
                                         return [4 /*yield*/, new Promise(function (resolve) {
                                                 return setTimeout(resolve, parseInt(seconds_1) * 1000);
                                             })];
-                                    case 4:
-                                        _a.sent();
-                                        return [3 /*break*/, 7];
                                     case 5:
+                                        _a.sent();
+                                        return [3 /*break*/, 8];
+                                    case 6:
                                         waited = false;
                                         return [4 /*yield*/, new Promise(function (resolve) { return setTimeout(resolve, 5000); })];
-                                    case 6:
+                                    case 7:
                                         _a.sent();
-                                        _a.label = 7;
-                                    case 7: return [4 /*yield*/, page.screenshot({ path: "./temp/" + filename_1 + ".png" })];
-                                    case 8:
+                                        _a.label = 8;
+                                    case 8: return [4 /*yield*/, page.url()];
+                                    case 9:
+                                        secondUrl = _a.sent();
+                                        return [4 /*yield*/, page.screenshot({ path: "./temp/" + filename_1 + ".png" })];
+                                    case 10:
                                         _a.sent();
                                         return [4 /*yield*/, browser.close()];
-                                    case 9:
+                                    case 11:
                                         _a.sent();
+                                        if (secondUrl != firstUrl) {
+                                            redirect = "true";
+                                        }
+                                        else {
+                                            redirect = "false";
+                                        }
                                         return [2 /*return*/];
                                 }
                             });
@@ -119,14 +169,24 @@ exports.default = {
                                 switch (_a.label) {
                                     case 0:
                                         embed = new discord_js_1.MessageEmbed()
-                                            .setTitle(link_1)
+                                            .setTitle("Checket URL scanner")
                                             .setColor("#F86154")
                                             .setImage("attachment://" + filename_1 + ".png");
                                         if (waited) {
-                                            embed.setFooter("Checket, loaded for " + args[1] + " second(s).", "https://cdn.discordapp.com/avatars/888736693128151103/1cfc286bdcede1eb4d227d53fc5413fb.webp?size=128");
+                                            embed.setFooter("Checket, loaded for " +
+                                                args[1] +
+                                                " second(s)." +
+                                                " | Redirected: " +
+                                                redirect +
+                                                " | Endpoint: " +
+                                                secondUrl, "https://cdn.discordapp.com/avatars/888736693128151103/1cfc286bdcede1eb4d227d53fc5413fb.webp?size=128");
                                         }
                                         else {
-                                            embed.setFooter("Checket", "https://cdn.discordapp.com/avatars/888736693128151103/1cfc286bdcede1eb4d227d53fc5413fb.webp?size=128");
+                                            embed.setFooter("Checket" +
+                                                " | Redirected: " +
+                                                redirect +
+                                                " | Endpoint: " +
+                                                secondUrl, "https://cdn.discordapp.com/avatars/888736693128151103/1cfc286bdcede1eb4d227d53fc5413fb.webp?size=128");
                                         }
                                         return [4 /*yield*/, message.reply({
                                                 embeds: [embed],
@@ -141,8 +201,10 @@ exports.default = {
                                 }
                             });
                         }); });
-                        return [3 /*break*/, 5];
-                    case 2:
+                        return [3 /*break*/, 10];
+                    case 9: return [2 /*return*/];
+                    case 10: return [3 /*break*/, 14];
+                    case 11:
                         embed = new discord_js_1.MessageEmbed()
                             .setTitle("Error")
                             .setDescription("You did not provide a valid link.")
@@ -151,29 +213,29 @@ exports.default = {
                         return [4 /*yield*/, message.reply({
                                 embeds: [embed],
                             })];
-                    case 3:
+                    case 12:
                         newMessage = _b.sent();
                         // Delete embed after 5 seconds
                         return [4 /*yield*/, new Promise(function (resolve) { return setTimeout(resolve, 5 * 1000); })];
-                    case 4:
+                    case 13:
                         // Delete embed after 5 seconds
                         _b.sent();
                         newMessage.delete();
-                        _b.label = 5;
-                    case 5: return [3 /*break*/, 8];
-                    case 6:
+                        _b.label = 14;
+                    case 14: return [3 /*break*/, 17];
+                    case 15:
                         embed = new discord_js_1.MessageEmbed()
                             .setTitle("!Check")
-                            .setDescription("To use the !Check command you need to do `!Check {$URL} {$SECONDS}` the seconds parameter is optional. It chooses how long you want to let the website load. Default is 5 seconds.\n\nSo your command should look like this `!Check https://stianwiu.me 10`")
+                            .setDescription("To use the !Check command you need to do `!Check {$URL} {$SECONDS}` the seconds parameter is optional. It sets how long you want to let the website load. Default is 5 seconds.\n\nSo your command should look like this `!Check https://stianwiu.me 10`")
                             .setFooter("A valid link should start with http:// or https://", "https://cdn.discordapp.com/avatars/888736693128151103/1cfc286bdcede1eb4d227d53fc5413fb.webp?size=128")
                             .setColor("RED");
                         return [4 /*yield*/, message.reply({
                                 embeds: [embed],
                             })];
-                    case 7:
+                    case 16:
                         newMessage = _b.sent();
-                        _b.label = 8;
-                    case 8: return [2 /*return*/];
+                        _b.label = 17;
+                    case 17: return [2 /*return*/];
                 }
             });
         });

@@ -40,7 +40,7 @@ client.on("ready", function () {
     // Settings for WOKCommands.
     new wokcommands_1.default(client, {
         commandsDir: path_1.default.join(__dirname, "commands"),
-        typeScript: false,
+        typeScript: true,
         testServers: ["715215005812785182"],
         disabledDefaultCommands: [
             //Disable commands that come pre made with WOKCommands.
@@ -52,6 +52,6 @@ client.on("ready", function () {
             "slash",
             "help",
         ],
-    }).setDefaultPrefix("!");
+    }).setDefaultPrefix("?");
 });
-client.login(process.env.TOKEN);
+client.login(process.env.TESTTOKEN);
