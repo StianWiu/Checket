@@ -29,81 +29,29 @@ var path_1 = __importDefault(require("path"));
 dotenv_1.default.config();
 var client = new discord_js_1.default.Client({
     intents: [
+        //Specify what intents bot requires.
         discord_js_1.Intents.FLAGS.GUILDS,
         discord_js_1.Intents.FLAGS.GUILD_MESSAGES,
         discord_js_1.Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
-    ]
+    ],
 });
-client.on('ready', function () {
-    console.log('Bot has started');
+client.on("ready", function () {
+    console.log("Bot has started");
     // Settings for WOKCommands.
     new wokcommands_1.default(client, {
-        commandsDir: path_1.default.join(__dirname, 'commands'),
+        commandsDir: path_1.default.join(__dirname, "commands"),
         typeScript: false,
-        testServers: ['715215005812785182'],
+        testServers: ["715215005812785182"],
         disabledDefaultCommands: [
-            'channelonly',
-            'command',
-            'language',
-            'prefix',
-            'requiredrole',
-            'slash',
-            'help',
-        ]
-    })
-        .setDefaultPrefix('!');
+            //Disable commands that come pre made with WOKCommands.
+            "channelonly",
+            "command",
+            "language",
+            "prefix",
+            "requiredrole",
+            "slash",
+            "help",
+        ],
+    }).setDefaultPrefix("!");
 });
 client.login(process.env.TOKEN);
-// const guildId = '715215005812785182'
-// const guild = client.guilds.cache.get(guildId)
-// let commands
-// if (guild) {
-//     commands = guild.commands
-// } else {
-//     commands = client.application?.commands
-// }
-// commands?.create({
-//     name: 'ping',
-//     description: 'Replies with pong',
-// })
-// commands?.create({
-//     name: 'add',
-//     description: 'Adds two number.',
-//     options: [
-//         {
-//             name: 'num1',
-//             description: 'The first number',
-//             required: true,
-//             type: DiscordJS.Constants.ApplicationCommandOptionTypes.NUMBER
-//         },
-//         {
-//             name:  'num2',
-//             description: 'The second number',
-//             required: true,
-//             type: DiscordJS.Constants.ApplicationCommandOptionTypes.NUMBER
-//         }
-//     ]
-// })
-// Old way to use slashcommands
-// client.on('interactionCreate', async (interaction) =>  {
-//     if (!interaction.isCommand()) {
-//         return;
-//     }
-//     const { commandName, options } = interaction
-//     if (commandName === 'ping') {
-//         interaction.reply({
-//             content: 'pong',
-//             ephemeral: true,
-//         })
-//     } else if (commandName === 'add') {
-//         const num1 = options.getNumber('num1')!
-//         const num2 = options.getNumber('num2')!
-//         await interaction.deferReply({
-//             ephemeral: true,
-//         })
-//         await new Promise(resolve => setTimeout(resolve, 5000))
-//         await interaction.editReply({
-//             content: `The sum is ${num1 + num2}`,
-//         })
-//     }
-// })
