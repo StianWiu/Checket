@@ -90,3 +90,14 @@ typings/
 # Token
 
 ./.env
+
+# Code to copy from
+
+./commands/button.ts
+./commands/button.js
+./commands/collector.ts
+./commands/collector.js
+./commands/embed.ts
+./commands/embed.js
+./commands/ping.ts
+./commands/ping.js
