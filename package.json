@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/Pignuuu/Checket#readme",
   "dependencies": {
+    "archiver": "^5.3.0",
     "discord.js": "^13.1.0",
     "dotenv": "^10.0.0",
     "nodemon": "^2.0.12",
